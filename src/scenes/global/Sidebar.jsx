@@ -1,29 +1,30 @@
 import React, { useState } from "react";
-import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { tokens } from "../../theme";
-import HomeOutlined from "@mui/icons-material/HomeOutlined";
 import PeopleOutlined from "@mui/icons-material/PeopleOutlined";
 import CalendarTodayOutlined from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlined from "@mui/icons-material/HelpOutlined";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import HistoryIcon from "@mui/icons-material/History";
 import MenuOutlined from "@mui/icons-material/MenuOutlined";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import logo from "../../logos/Oklahoma_Sooners_logo.png";
+import CelebrationIcon from "@mui/icons-material/Celebration";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
     <MenuItem
-      active={selected === title}
+      active={selected === to}
       style={{
         color: colors.grey[100],
       }}
-      onClick={() => setSelected(title)}
+      onClick={() => setSelected(to)}
       icon={icon}
     >
       <Typography>{title}</Typography>
@@ -33,13 +34,13 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 };
 
 const Sidebar = () => {
+  const location = useLocation();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [selected, setSelected] = useState("Dashboard");
+  const [selected, setSelected] = useState(location.pathname || "/");
 
-  console.log(theme.palette.mode);
-
+  console.log("location", selected);
   return (
     <Box
       sx={{
@@ -93,15 +94,11 @@ const Sidebar = () => {
 
           {!isCollapsed && (
             <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
-                {/* <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={`../../assets/user.png`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                /> */}
-              </Box>
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              ></Box>
               <Box textAlign="center">
                 <Typography
                   variant="h2"
@@ -122,10 +119,92 @@ const Sidebar = () => {
             <Item
               title="Dashboard"
               to="/"
-              icon={<HomeOutlined />}
+              icon={<DashboardIcon />}
               selected={selected}
               setSelected={setSelected}
             />
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Game Plans
+            </Typography>
+            <SubMenu
+              icon={<CelebrationIcon />}
+              style={{
+                color: colors.grey[100],
+              }}
+              title="Marketing"
+            >
+              <Item
+                title="Game by Game Calendar"
+                to="/game-by-game-calendar"
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Single Game Calendar"
+                to="/single-game-calendar"
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Proposals / Plans"
+                to="/proposals-plans"
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Notes / Agenda"
+                to="/notes-agenda"
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </SubMenu>
+
+            <SubMenu
+              icon={<LocalActivityIcon />}
+              style={{
+                color: colors.grey[100],
+              }}
+              title="Ticketing"
+            >
+              <Item
+                title="Season Tickets"
+                to="/season-tickets"
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Mini Plans"
+                to="/mini-plans"
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Attendance Data"
+                to="/attendance-data"
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </SubMenu>
+
+            <Item
+              title="Calendar"
+              to="/calendar"
+              icon={<CalendarTodayOutlined />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Taskboard"
+              to="/taskboard"
+              icon={<FormatListBulletedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
             <Typography
               variant="h6"
               color={colors.grey[300]}
@@ -147,71 +226,15 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            {/* <Item
-              title="Invoices Balances"
-              to="/invoices"
-              icon={<ReceiptOutlined />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
             <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Games
+              History
             </Typography>
             <Item
-              title="Calendar"
-              to="/calendar"
-              icon={<CalendarTodayOutlined />}
-              selected={selected}
-              setSelected={setSelected}
-            />{" "}
-            <Item
-              title="Taskboard"
-              to="/taskboard"
-              icon={<FormatListBulletedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Questions"
-              to="/questions"
-              icon={<HelpOutlined />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            {/* <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Charts
-            </Typography>
-            <Item
-              title="Bar Chart"
-              to="/bar"
-              icon={<BarChartOutlined />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Pie Chart"
-              to="/pie"
-              icon={<PieChartOutlineOutlined />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Line Chart"
-              to="/line"
-              icon={<TimelineOutlined />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
-            <Item
-              title="History"
+              title="Archive"
               to="/history"
               icon={<HistoryIcon />}
               selected={selected}

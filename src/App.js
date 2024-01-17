@@ -18,6 +18,7 @@ import Line from "./scenes/line";
 import Pie from "./scenes/pie";
 import Game from "./scenes/game";
 import History from "./scenes/history";
+import GameByGame from "./scenes/gamebygame";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -32,6 +33,7 @@ function App() {
             <TopBar />
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/game-by-game-calendar" element={<GameByGame />} />
               <Route path="/team" element={<Team />} />
               <Route path="/bar" element={<Bar />} />
               <Route path="/pie" element={<Pie />} />
