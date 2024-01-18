@@ -40,10 +40,12 @@ const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState(location.pathname || "/");
 
-  console.log("location", selected);
   return (
     <Box
       sx={{
+        height: "100vh",
+        position: "sticky",
+        top: 0,
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
         },

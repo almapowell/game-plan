@@ -10,10 +10,21 @@ import BarChart from "../../components/BarChart";
 import PieChart from "../../components/PieChart";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
+import { useEffect } from "react";
 
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  useEffect(() => {
+    fetch("/users")
+      .then((response) => {
+        // if (response.ok) {
+        //   return response.json();
+        // }
+      })
+      .then((data) => console.log(data));
+  }, []);
 
   return (
     <Box m="20px">
