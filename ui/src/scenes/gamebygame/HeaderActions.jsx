@@ -2,8 +2,10 @@ import { Box, Button, useTheme } from "@mui/material";
 import React from "react";
 import { tokens } from "../../theme";
 import AddIcon from "@mui/icons-material/Add";
+import SaveAltIcon from "@mui/icons-material/SaveAlt";
+import { redButton } from "../../helpers";
 
-const HeaderActions = () => {
+const HeaderActions = ({ setAddOpponentModalIsOpen }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
@@ -19,21 +21,12 @@ const HeaderActions = () => {
         }}
         variant="contained"
         color="primary"
+        onClick={() => setAddOpponentModalIsOpen(true)}
       >
         <AddIcon /> Add New Game
       </Button>
-      <Button
-        style={{
-          width: "200px",
-          height: "50px",
-          fontSize: "15px",
-          fontWeight: "600",
-          textTransform: "none",
-        }}
-        variant="contained"
-        color="secondary"
-      >
-        Save
+      <Button style={redButton} variant="contained" color="secondary">
+        <SaveAltIcon fontSize="small" /> Save
       </Button>
     </Box>
   );

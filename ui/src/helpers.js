@@ -15,6 +15,15 @@ export const modalStyles = {
   gap: 3,
 };
 
+export const redButton = {
+  width: "200px",
+  height: "50px",
+  fontSize: "15px",
+  fontWeight: "600",
+  textTransform: "none",
+  gap: "5px",
+};
+
 export const generateShades = (num, startColor, endColor) => {
   function hexToRgb(hex) {
     return [
@@ -43,4 +52,11 @@ export const generateShades = (num, startColor, endColor) => {
   }
 
   return colorRange;
+};
+
+const smallPadding = ["opponent", "date", "time", "tv"];
+
+export const getPaddingValue = (value) => {
+  if (smallPadding.includes(value)) return "5px";
+  return "18px";
 };

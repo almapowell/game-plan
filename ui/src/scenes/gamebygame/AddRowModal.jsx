@@ -1,23 +1,5 @@
-import {
-  Box,
-  Table,
-  TableRow,
-  TableCell,
-  Button,
-  Modal,
-  Typography,
-  TextField,
-  TableBody,
-  useTheme,
-} from "@mui/material";
+import { Box, Button, Modal, Typography, TextField } from "@mui/material";
 import React, { useState } from "react";
-import Header from "../../components/Header";
-import { mockOpponents, mockRows } from "./mockData";
-import AddIcon from "@mui/icons-material/Add";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { tokens } from "../../theme";
-import HeaderActions from "./HeaderActions";
-import LoopOverRowValues from "./LoopOverRowValues";
 import { modalStyles } from "../../helpers";
 
 const btnStyle = {
@@ -30,15 +12,16 @@ const btnStyle = {
   color: "inherit",
 };
 
-const AddRowModal = ({ setOpenModal, setRows }) => {
+const AddRowModal = ({ closeModal, setRows }) => {
   const [newRowName, setNewRowName] = useState("");
 
   return (
-    <Modal open={true} onClose={() => setOpenModal(false)}>
+    <Modal open={true} onClose={() => closeModal()}>
       <form>
         <Box sx={modalStyles}>
           <Typography variant="h3">Name of new row:</Typography>
           <TextField
+            autoFocus
             value={newRowName}
             onChange={(e) => setNewRowName(e.target.value)}
             sx={{ border: "1px solid grey", borderRadius: "5px" }}
@@ -54,12 +37,10 @@ const AddRowModal = ({ setOpenModal, setRows }) => {
             onClick={() => {
               setRows((prevRows) => [
                 ...prevRows,
-                {
-                  label: newRowName,
-                  value: newRowName.toLowerCase().replace(" ", "_"),
-                },
+                newRowName.toLowerCase().replace(/ /g, "_"),
               ]);
-              setOpenModal(false);
+
+              closeModal();
               setNewRowName("");
             }}
             type="submit"

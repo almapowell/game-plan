@@ -1,0 +1,48 @@
+.dinosaur-game {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 400px;
+}
+
+.dinosaur-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  padding: 50px;
+  width: 150px;
+  height: 50px;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    to left,
+    #aeaeae,
+    #f80000 50%,
+    #eee 75%,
+    #333 75%
+  );
+  background: linear-gradient(to right, #ff0000, #464646);
+}
+
+h3 {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin: 0;
+  z-index: 1;
+}
+
+.dinosaur-card:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: transform 0.5s ease;
+}
+
+.flipped {
+  background: none;
+}
