@@ -7,10 +7,29 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import GridContainer from "../../components/GridContainer";
+import { API_URL } from "../../utils";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Team = () => {
+  const [team, setTeam] = useState([]);
   const theme = useTheme();
+
   const colors = tokens(theme.palette.mode);
+
+  const fetchTeam = async () => {
+    try {
+      const { team } = await axios.get(API_URL);
+      setTeam(team);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTeam();
+  }, []);
+
   const columns = [
     {
       field: "name",
@@ -59,6 +78,8 @@ const Team = () => {
       },
     },
   ];
+
+  console.log(team);
 
   return (
     <Box m="20px">
